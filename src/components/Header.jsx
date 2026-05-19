@@ -27,15 +27,14 @@ export default function Header({ activeChapter, userChoices, scrollToChapter }) 
         className="site-logo ui-interactive"
         onClick={(e) => {
           e.preventDefault();
-          scrollToChapter(0);
+          scrollToChapter(-1);
         }}
       >
-        <span>DIALECTICA</span>
+        <span>Triết học Mác — Lênin</span>
         <span className="heart">♦</span>
-        <span className="italic">academy</span>
+        <span className="italic">Biện chứng duy vật</span>
       </a>
 
-      <Soundscape />
     </header>
   );
 }

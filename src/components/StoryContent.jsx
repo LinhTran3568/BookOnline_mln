@@ -1,27 +1,42 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
-  Sparkles, Layers, Search, Shuffle, FileText,
-  ArrowDown, RefreshCw, Eye, BookOpen, Users, Target,
-  BookMarked, Heart, Quote
+  BookMarked,
+  BookOpen,
+  Eye,
+  FileText,
+  Quote,
+  Search,
+  Sparkles,
+  Target,
+  Users
 } from 'lucide-react';
 import CVPreview from './CVPreview';
 
-import studentA from '../assets/student_a.png';
-import studentB from '../assets/student_b.png';
+import coverPoster from '../assets/lenin.jpg';
+import studentA from '../assets/linh a.jpg';
+import studentB from '../assets/quang gay.jpg';
 import dialectics from '../assets/dialectics.png';
 import trio from '../assets/trio.png';
 import marxEngels from '../assets/marx_engels.png';
 import lenin from '../assets/lenin.png';
 import heroImg from '../assets/hero.png';
+import interviewVideo from '../assets/1805.mp4';
 
 const PAGE_NUMBERS = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
 function BookSpread({ pageIndex, children }) {
+  const showPageNumbers =
+    typeof pageIndex === 'number' && pageIndex >= 0 && pageIndex < PAGE_NUMBERS.length;
+
   return (
     <div className="book-spread">
-      <span className="book-page-number left">— {PAGE_NUMBERS[pageIndex]} —</span>
-      <span className="book-page-number right">Triết học Mác-Lênin</span>
+      {showPageNumbers && (
+        <>
+          <span className="book-page-number left">— {PAGE_NUMBERS[pageIndex]} —</span>
+          <span className="book-page-number right">Triết học Mác-Lênin</span>
+        </>
+      )}
       <div className="narrative-card">{children}</div>
     </div>
   );
@@ -29,11 +44,12 @@ function BookSpread({ pageIndex, children }) {
 
 export default function StoryContent({
   activeChapter,
-  userChoices,
-  onMakeChoice,
   onOpenLore,
   scrollToChapter
 }) {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const videoRef = useRef(null);
+
   const slideVariants = {
     hidden: { opacity: 0, y: 24 },
     visible: {
@@ -48,9 +64,86 @@ export default function StoryContent({
     }
   };
 
+  useEffect(() => {
+    if (!isVideoOpen) return;
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+    const playPromise = videoEl.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        // Autoplay can be blocked; user can press play.
+      });
+    }
+  }, [isVideoOpen]);
+
   return (
     <div className="ui-layer" style={{ width: '100%', position: 'relative' }}>
       <AnimatePresence mode="wait">
+
+        {activeChapter === -1 && (
+          <motion.section
+            key="chapter-cover"
+            className="story-section align-center"
+            variants={slideVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <BookSpread pageIndex={-1}>
+              <div
+                className="ui-interactive"
+                role="button"
+                tabIndex={0}
+                onClick={() => scrollToChapter(0)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    scrollToChapter(0);
+                  }
+                }}
+                aria-label="Mở sách"
+                style={{
+                  position: 'relative',
+                  textAlign: 'center',
+                  margin: '-40px -48px -50px',
+                  padding: '40px 48px 50px',
+                  minHeight: 'min(74vh, 720px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  outline: 'none'
+                }}
+              >
+                <img src={coverPoster} alt="" className="cover-full-bg" aria-hidden="true" />
+
+                <div className="cover-overlay">
+                  <div className="chapter-badge" style={{ justifyContent: 'center', marginBottom: '12px' }}>
+                    <BookOpen size={14} /> TRIẾT HỌC MÁC — LÊ-NIN • PHÉP BIỆN CHỨNG DUY VẬT
+                  </div>
+
+                  <h1
+                    className="cinzel"
+                    style={{
+                      fontSize: 'clamp(1.8rem, 4.6vw, 3.2rem)',
+                      fontWeight: 600,
+                      letterSpacing: '4px',
+                      marginBottom: '10px',
+                      lineHeight: 1,
+                      background: 'linear-gradient(135deg, var(--ink) 0%, var(--rose) 55%, var(--gold-deep) 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent'
+                    }}
+                  >
+                    BIỆN CHỨNG DUY VẬT
+                  </h1>
+
+                  
+                </div>
+              </div>
+            </BookSpread>
+          </motion.section>
+        )}
 
         {activeChapter === 0 && (
           <motion.section
@@ -68,9 +161,8 @@ export default function StoryContent({
                   src={trio}
                   alt="Các Mác, Phờ-ri-đrích Ăng-ghen, V.I. Lê-nin"
                   className="slide-image"
-                  style={{ maxWidth: '320px', margin: '0 auto 24px', display: 'block' }}
+                  style={{ maxWidth: '340px', margin: '18px auto 22px', display: 'block' }}
                 />
-
                 <div className="chapter-badge">
                   <BookOpen size={14} /> BÀI THUYẾT TRÌNH NHÓM • CHƯƠNG 2: CHỦ NGHĨA DUY VẬT BIỆN CHỨNG
                 </div>
@@ -85,46 +177,51 @@ export default function StoryContent({
                     lineHeight: 1.2,
                     background: 'linear-gradient(135deg, var(--ink) 0%, var(--rose) 55%, var(--gold-deep) 100%)',
                     WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    WebkitTextFillColor: 'transparent'
                   }}
                 >
-                  BIỆN CHỨNG LAO ĐỘNG
+                  BIỆN CHỨNG DUY VẬT
                 </h1>
 
-                <h3 className="cinzel" style={{
-                  fontSize: 'clamp(0.85rem, 2vw, 1.1rem)',
-                  color: 'var(--rose)',
-                  letterSpacing: '2px',
-                  marginBottom: '24px',
-                  fontWeight: 700,
-                }}>
-                  Vận dụng các cặp phạm trù cơ bản của Phép biện chứng duy vật
-                  <br />giải mã bài toán tuyển dụng Sinh viên A & B
+                <h3
+                  className="cinzel"
+                  style={{
+                    fontSize: 'clamp(0.85rem, 2vw, 1.1rem)',
+                    color: 'var(--rose)',
+                    letterSpacing: '2px',
+                    marginBottom: '24px',
+                    fontWeight: 700
+                  }}
+                >
+                  Vận dụng các cặp phạm trù cơ bản của phép biện chứng duy vật
+                  <br />phân tích tình huống tuyển dụng Sinh viên A & B
                 </h3>
 
-                <dl className="presentation-meta" style={{ textAlign: 'left' }}>
+                <dl className="presentation-meta">
                   <div><dt>Môn học</dt><dd>Triết học Mác — Lênin</dd></div>
                   <div><dt>Chương</dt><dd>II. Phép biện chứng duy vật</dd></div>
-                  <div><dt>Đề tài</dt><dd>Các cặp phạm trù cơ bản</dd></div>
                   <div><dt>Hình thức</dt><dd>Thuyết trình nhóm + Case study</dd></div>
                 </dl>
 
-                <div style={{
-                  background: 'rgba(255,251,244,0.85)',
-                  border: '1px solid var(--line)',
-                  padding: '22px 28px',
-                  marginBottom: '28px',
-                  textAlign: 'left',
-                }}>
+                <div
+                  style={{
+                    background: 'rgba(255,251,244,0.85)',
+                    border: '1px solid var(--line)',
+                    padding: '22px 28px',
+                    marginBottom: '28px',
+                    textAlign: 'left'
+                  }}
+                >
                   <p style={{ fontSize: '1.02rem', lineHeight: 1.75, marginBottom: '14px', color: 'var(--ink)' }}>
-                    <strong>Bối cảnh:</strong> Tập đoàn công nghệ lớn tuyển dụng vị trí kỹ sư phần mềm.
-                    <strong> Sinh viên A</strong> — tốt nghiệp loại Giỏi, CV bóng bẩy, nhiều buzzword — bị loại ngay vòng phỏng vấn kỹ thuật.
-                    <strong> Sinh viên B</strong> — bằng Khá, CV tối giản — trúng tuyển nhờ sửa trực tiếp lỗi hệ thống trong buổi phỏng vấn.
+                    <strong>Bối cảnh:</strong> Doanh nghiệp tuyển dụng vị trí kỹ sư phần mềm và tổ chức phỏng vấn theo hướng
+                    kiểm tra năng lực giải quyết vấn đề.
+                    <strong> Sinh viên A</strong> — tốt nghiệp loại Giỏi, hồ sơ trình bày ấn tượng — bị loại ở vòng phỏng vấn kỹ thuật.
+                    <strong> Sinh viên B</strong> — tốt nghiệp loại Khá, hồ sơ tối giản — trúng tuyển nhờ xử lý được bài toán thực tế.
                   </p>
                   <p style={{ fontSize: '0.9rem', color: 'var(--ink-soft)', margin: 0, lineHeight: 1.65 }}>
-                    A cho rằng B "ăn may" hoặc có quan hệ. Nhóm chúng em dùng <em>Nội dung — Hình thức</em>,
-                    <em> Bản chất — Hiện tượng</em>, <em>Khả năng — Hiện thực</em>, <em>Tất nhiên — Ngẫu nhiên</em>
-                    để phân tích và bác bỏ tư duy siêu hình của A.
+                    A cho rằng B “ăn may” hoặc do yếu tố bên ngoài. Nhóm vận dụng các cặp phạm trù
+                    <em> Nội dung — Hình thức</em>, <em> Bản chất — Hiện tượng</em>, <em> Khả năng — Hiện thực</em>
+                    (mở rộng thêm <em> Tất nhiên — Ngẫu nhiên</em>) để phân tích theo quan điểm duy vật biện chứng.
                   </p>
                 </div>
 
@@ -141,10 +238,6 @@ export default function StoryContent({
                     <p style={{ fontSize: '0.82rem', color: 'var(--ink-soft)' }}>Khá • CV thực chất • Trúng tuyển</p>
                   </div>
                 </div>
-
-                <button className="btn-cosmic ui-interactive" onClick={() => scrollToChapter(1)} style={{ marginTop: '20px' }}>
-                  <Sparkles size={14} /> MỞ TRANG SO SÁNH CV
-                </button>
               </div>
             </BookSpread>
           </motion.section>
@@ -161,13 +254,13 @@ export default function StoryContent({
           >
             <BookSpread pageIndex={1}>
               <span className="chapter-badge">Trang II • Cặp phạm trù Nội dung & Hình thức</span>
-              <h2>Vỏ Hồ Sơ Hào Nhoáng Vs. Năng Lực Thực Chất</h2>
+              <h2>Nội dung — Hình thức: CV chỉ có ý nghĩa khi phản ánh đúng năng lực</h2>
 
               <p>
-                Theo quan điểm duy vật biện chứng, mọi sự vật đều có <strong>nội dung</strong> (tổng hợp các yếu tố,
-                mối liên hệ bên trong) và <strong>hình thức</strong> (phương thức tồn tại, biểu hiện bên ngoài).
-                Nội dung quyết định hình thức; hình thức tác động trở lại nội dung. CV là <em>hình thức</em> biểu hiện
-                năng lực — nhưng không thay thế được nội dung thực chất.
+                Theo phép biện chứng duy vật, mọi sự vật đều có <strong>nội dung</strong> (tổng hợp các yếu tố, mặt,
+                quá trình tạo nên sự vật) và <strong>hình thức</strong> (phương thức tồn tại, cách tổ chức và biểu hiện của nội dung).
+                Nội dung giữ vai trò quyết định; hình thức có tính độc lập tương đối và <em>tác động trở lại</em> nội dung.
+                Trong tuyển dụng, CV là <em>hình thức</em> trình bày năng lực, có thể hỗ trợ truyền đạt, nhưng không thể thay thế năng lực thực tế.
               </p>
 
               <div className="cv-gallery">
@@ -176,55 +269,32 @@ export default function StoryContent({
               </div>
 
               <div className="philosophy-quote">
-                "Hình thức của một sự vật chỉ có giá trị thực sự khi nó là sự biểu hiện chân thực
-                của một nội dung biện chứng phong phú bên trong."
-                <strong>— C. Mác & F. Ăng-ghen</strong>
+                Luận điểm phương pháp luận: <strong>Nội dung quyết định hình thức</strong>.
+                Một hình thức “đẹp” chỉ có giá trị khi phản ánh đúng và làm nổi bật nội dung; nếu hình thức tách rời nội dung,
+                giá trị sẽ không bền vững.
               </div>
 
-              <div className="slide-layout" style={{ marginTop: '20px' }}>
-                <div className="slide-text">
-                  <ul style={{ paddingLeft: '20px', fontSize: '0.92rem', color: 'var(--ink-soft)', lineHeight: 1.7 }}>
-                    <li style={{ marginBottom: '10px' }}>
-                      <strong style={{ color: 'var(--rose)' }}>A:</strong> CV gradient, icon đẹp, từ khóa "Leadership", "Synergy"
-                      — hình thức vượt xa nội dung kỹ thuật.
-                    </li>
-                    <li>
-                      <strong style={{ color: '#2c5f7a' }}>B:</strong> CV đen trắng, liệt kê repo GitHub, stack công nghệ,
-                      mô tả bug đã fix — nội dung tự lên tiếng.
-                    </li>
-                  </ul>
-
-                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', margin: '16px 0' }}>
+               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', margin: '16px 0' }}>
                     <button className="btn-cosmic ui-interactive" style={{ padding: '8px 14px', fontSize: '0.72rem' }}
                       onClick={() => onOpenLore('contentForm')}>
                       <Eye size={12} /> Lý thuyết Nội dung & Hình thức
                     </button>
                   </div>
 
-                  <div className="choices-container">
-                    <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>Quan điểm của nhóm về CV:</span>
-                    <button
-                      className={`btn-choice ui-interactive ${userChoices.cvChoice === 'form' ? 'selected' : ''}`}
-                      onClick={() => onMakeChoice('cvChoice', 'form')}
-                    >
-                      <span>CV đẹp = lợi thế tuyệt đối (Hình thức quyết định)</span>
-                      <Layers size={14} />
-                    </button>
-                    <button
-                      className={`btn-choice ui-interactive ${userChoices.cvChoice === 'content' ? 'selected' : ''}`}
-                      onClick={() => onMakeChoice('cvChoice', 'content')}
-                    >
-                      <span>Năng lực thực chất là cốt lõi (Nội dung quyết định)</span>
-                      <Layers size={14} />
-                    </button>
-                  </div>
+              <div className="slide-layout" style={{ alignItems: 'flex-start' }}>
+                <div className="slide-text">
+                  <ul style={{ paddingLeft: '20px', fontSize: '0.92rem', color: 'var(--ink-soft)', lineHeight: 1.7 }}>
+                    <li style={{ marginBottom: '10px' }}>
+                      <strong style={{ color: 'var(--rose)' }}>A:</strong> tập trung làm nổi bật hồ sơ, dùng nhiều từ khóa “chuyên nghiệp”
+                      — nhưng phần minh chứng năng lực giải quyết vấn đề còn mờ nhạt.
+                    </li>
+                    <li>
+                      <strong style={{ color: '#2c5f7a' }}>B:</strong> CV đen trắng, liệt kê repo GitHub, stack công nghệ,
+                      mô tả vấn đề đã xử lý — nội dung thể hiện qua minh chứng cụ thể.
+                    </li>
+                  </ul>
 
-                  {userChoices.cvChoice && (
-                    <button className="btn-cosmic ui-interactive" style={{ marginTop: '16px' }}
-                      onClick={() => scrollToChapter(2)}>
-                      Trang III: Phòng phỏng vấn <ArrowDown size={14} />
-                    </button>
-                  )}
+                  
                 </div>
                 <div className="slide-media">
                   <img src={marxEngels} alt="Mác và Ăng-ghen" className="slide-image" />
@@ -245,11 +315,13 @@ export default function StoryContent({
           >
             <BookSpread pageIndex={2}>
               <span className="chapter-badge">Trang III • Khả năng & Hiện thực | Bản chất & Hiện tượng</span>
-              <h2>Phòng Phỏng Vấn: Lý Thuyết Suông Đối Mặt Thực Chiến</h2>
+              <h2>Bản chất — Hiện tượng & Khả năng — Hiện thực trong phỏng vấn</h2>
 
               <p>
-                Nhà tuyển dụng đưa ra bài test: sửa lỗi API timeout trên hệ thống logistics đang chạy production.
-                Đây là "phép thử" biến <strong>khả năng</strong> (tiềm năng) thành <strong>hiện thực</strong> (hành động có giá trị).
+                Nhà tuyển dụng đưa ra bài test xử lý lỗi hệ thống đang vận hành.
+                Về mặt phương pháp luận, đây là “điều kiện” để kiểm tra: (1) <strong>bản chất</strong> năng lực (bên trong) có thực sự tương ứng
+                với <strong>hiện tượng</strong> hồ sơ (bên ngoài) hay không; (2) ứng viên có chuyển <strong>khả năng</strong> (tiềm năng) thành
+                <strong>hiện thực</strong> (kết quả/giải pháp) hay không.
               </p>
 
               <div className="interview-scene">
@@ -257,24 +329,23 @@ export default function StoryContent({
                   <img src={studentA} alt="A trong phỏng vấn" style={{ width: '100%', maxHeight: '140px', objectFit: 'contain', marginBottom: '10px' }} />
                   <h4 style={{ color: 'var(--rose)', fontFamily: 'var(--font-roman)', fontSize: '0.8rem', letterSpacing: '2px' }}>SINH VIÊN A</h4>
                   <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--ink-soft)' }}>
-                    Trích dẫn lý thuyết OOP, giải thích design pattern — nhưng không mở được terminal,
-                    không đọc được log lỗi. Bằng Giỏi chỉ là <em>hiện tượng</em> chưa chạm <em>bản chất</em> năng lực.
+                    Trình bày trôi chảy khái niệm, thuật ngữ — nhưng lúng túng khi phân tích log và khoanh vùng nguyên nhân.
+                    Điều này cho thấy “hiện tượng” (hồ sơ, lời nói) không đủ để đảm bảo “bản chất” năng lực đáp ứng yêu cầu.
                   </p>
                 </div>
                 <div className="interview-panel interview-panel--pass">
                   <img src={studentB} alt="B sửa hệ thống" style={{ width: '100%', maxHeight: '140px', objectFit: 'contain', marginBottom: '10px' }} />
                   <h4 style={{ color: '#2c5f7a', fontFamily: 'var(--font-roman)', fontSize: '0.8rem', letterSpacing: '2px' }}>SINH VIÊN B</h4>
                   <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--ink-soft)' }}>
-                    Phân tích stack trace, tối ưu query N+1, deploy hotfix trong 25 phút.
-                    Khả năng tiềm ẩn đã trở thành hiện thực có giá trị kinh tế cho doanh nghiệp.
+                    Phân tích lỗi theo quy trình, đề xuất phương án khả thi và chứng minh bằng thao tác cụ thể.
+                    Khả năng tiềm tàng được hiện thực hóa thành kết quả, qua đó bộc lộ bản chất năng lực.
                   </p>
                 </div>
               </div>
 
               <div className="philosophy-quote">
-                "Từ trực quan sinh động đến tư duy trừu tượng, và từ tư duy trừu tượng đến thực tiễn
-                — đó là con đường biện chứng của sự nhận thức chân lý khách quan."
-                <strong>— V.I. Lê-nin</strong>
+                Luận điểm nhận thức luận (tóm lược ý của Lê-nin): nhận thức không dừng ở lời nói/khái niệm,
+                mà phải quay trở về <strong>thực tiễn</strong> để kiểm nghiệm.
               </div>
 
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', margin: '16px 0' }}>
@@ -291,9 +362,7 @@ export default function StoryContent({
               <img src={dialectics} alt="Biện chứng" className="slide-image"
                 style={{ maxHeight: '200px', margin: '16px auto', display: 'block' }} />
 
-              <button className="btn-cosmic ui-interactive" onClick={() => scrollToChapter(3)}>
-                Trang IV: Sự phẫn nộ của A <ArrowDown size={14} />
-              </button>
+             
             </BookSpread>
           </motion.section>
         )}
@@ -309,57 +378,30 @@ export default function StoryContent({
           >
             <BookSpread pageIndex={3}>
               <span className="chapter-badge">Trang IV • Tất nhiên & Ngẫu nhiên</span>
-              <h2>Sự Phẫn Nộ Siêu Hình Và Ngụy Biện "Ăn May"</h2>
+              <h2>Mở rộng: Tất nhiên — Ngẫu nhiên và cách lý giải “ăn may”</h2>
 
               <div className="slide-layout">
                 <div className="slide-text">
                   <p>
-                    Thất bại khiến A cay cú. A quy chụp B trúng tuyển do <strong>"may mắn" (ngẫu nhiên)</strong>
-                    hoặc <strong>"quan hệ nâng đỡ"</strong> — đây là tư duy siêu hình: tách rời ngẫu nhiên khỏi tất nhiên,
+                    Sau khi bị loại, A có xu hướng quy chụp B trúng tuyển do <strong>“may mắn” (ngẫu nhiên)</strong>
+                    hoặc do yếu tố bên ngoài. Lập luận này dễ rơi vào nhìn nhận phiến diện: tuyệt đối hóa cái ngẫu nhiên,
                     bỏ qua chuỗi nguyên nhân — kết quả khách quan.
                   </p>
                   <p>
-                    Triết học Mác — Lênin: ngẫu nhiên luôn là hình thức biểu hiện của tất nhiên.
-                    Kỹ năng B tích lũy qua dự án thực tế (tất nhiên) mới tạo ra "cơ hội" trúng tuyển
-                    (biểu hiện ngẫu nhiên bên ngoài).
+                    Theo phép biện chứng duy vật, cái <strong>ngẫu nhiên</strong> thường là hình thức biểu hiện của cái <strong>tất nhiên</strong>.
+                    Nếu B giải quyết được bài toán thực tế, thì “cơ hội” trúng tuyển chỉ là biểu hiện bên ngoài của một quá trình
+                    tích lũy năng lực và kinh nghiệm (những điều kiện tất yếu bên trong).
                   </p>
 
                   <div className="character-row" style={{ justifyContent: 'flex-start' }}>
-                    <div className="character-card character-card--a" style={{ maxWidth: '220px' }}>
-                      <img src={studentA} alt="A thất vọng" />
-                      <h4>A: "B CHỈ GẶP MAY!"</h4>
-                    </div>
+                    
                   </div>
 
-                  <button className="btn-cosmic ui-interactive" style={{ padding: '8px 14px', fontSize: '0.72rem', margin: '12px 0' }}
-                    onClick={() => onOpenLore('necessityChance')}>
-                    <Shuffle size={12} /> Lý thuyết Tất nhiên & Ngẫu nhiên
-                  </button>
+                  
 
-                  <div className="choices-container">
-                    <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>Kết luận nhóm đưa vào slide:</span>
-                    <button
-                      className={`btn-choice ui-interactive ${userChoices.analysisChoice === 'subjective' ? 'selected' : ''}`}
-                      onClick={() => onMakeChoice('analysisChoice', 'subjective')}
-                    >
-                      <span>Ủng hộ A: B chỉ gặp may (ngẫu nhiên thuần túy)</span>
-                      <Shuffle size={14} />
-                    </button>
-                    <button
-                      className={`btn-choice ui-interactive ${userChoices.analysisChoice === 'dialectics' ? 'selected' : ''}`}
-                      onClick={() => onMakeChoice('analysisChoice', 'dialectics')}
-                    >
-                      <span>Biện chứng: năng lực thực chiến là tất nhiên</span>
-                      <Shuffle size={14} />
-                    </button>
-                  </div>
+                 
 
-                  {userChoices.analysisChoice && (
-                    <button className="btn-cosmic ui-interactive" style={{ marginTop: '16px' }}
-                      onClick={() => scrollToChapter(4)}>
-                      Trang V: Kết luận thuyết trình <ArrowDown size={14} />
-                    </button>
-                  )}
+                  
                 </div>
                 <div className="slide-media">
                   <img src={lenin} alt="V.I. Lê-nin" className="slide-image" />
@@ -386,43 +428,35 @@ export default function StoryContent({
               <span className="chapter-badge" style={{ color: 'var(--rose)' }}>
                 <Target size={14} /> KẾT LUẬN BÀI THUYẾT TRÌNH NHÓM
               </span>
-              <h2>Phương Pháp Luận Biện Chứng Cho Thế Hệ Trẻ Lao Động</h2>
+              <h2>Kết luận phương pháp luận: nhìn đúng bản chất, kiểm nghiệm bằng thực tiễn</h2>
 
               <p style={{ fontSize: '0.95rem', marginBottom: '20px' }}>
-                Qua case study A & B, nhóm xác định: thị trường lao động không "bất công chủ quan"
-                mà vận hành theo quy luật khách quan — chọn lọc năng lực thực chiến.
-                Dưới đây là 4 luận điểm cốt lõi và bài học hành động:
+                Qua tình huống A & B, nhóm nhấn mạnh: đánh giá năng lực trong tuyển dụng về cơ bản
+                dựa trên yêu cầu khách quan của công việc và tiêu chuẩn thực tiễn.
+                Dưới đây là các luận điểm/bài học rút ra từ các cặp phạm trù đã vận dụng:
               </p>
 
               <div className="synthesis-grid">
                 <div className="synthesis-card">
-                  <h5>1. Đồng bộ Nội dung & Hình thức</h5>
-                  <p>Bồi đắp kỹ năng trước khi trau chuốt CV. Hình thức đẹp phải phản ánh trung thực nội dung — không thay thế nội dung.</p>
+                  <h5>1. Nội dung quyết định hình thức</h5>
+                  <p>CV chỉ phát huy tác dụng khi phản ánh trung thực năng lực. Đầu tư kỹ năng/kinh nghiệm trước, rồi mới tối ưu cách trình bày.</p>
                 </div>
                 <div className="synthesis-card">
-                  <h5>2. Đi sâu Bản chất, không mê Hiện tượng</h5>
-                  <p>Bằng cấp, điểm số là hiện tượng; khả năng giải quyết vấn đề thực tế mới là bản chất mà nhà tuyển dụng tìm kiếm.</p>
+                  <h5>2. Phân biệt bản chất và hiện tượng</h5>
+                  <p>Bằng cấp, điểm số, cách diễn đạt là hiện tượng; năng lực giải quyết vấn đề và thái độ lao động mới là bản chất cần được kiểm chứng.</p>
                 </div>
                 <div className="synthesis-card">
-                  <h5>3. Tích lũy Tất nhiên, bỏ ảo tưởng Ngẫu nhiên</h5>
-                  <p>Thành công không đến từ "may mắn" tách rời. Mỗi dự án, mỗi bug đã fix là tích lũy tất nhiên dẫn đến kết quả.</p>
-                </div>
-                <div className="synthesis-card">
-                  <h5>4. Hiện thực hóa Khả năng</h5>
-                  <p>Tri thức sách vở chỉ là khả năng tiềm tàng. Hãy đưa lý luận vào thực tiễn — đó là tiêu chuẩn kiểm nghiệm chân lý.</p>
+                  <h5>3. Hiện thực hóa khả năng</h5>
+                  <p>Kiến thức và tiềm năng phải được chuyển hóa thành kết quả trong công việc. Thực tiễn là tiêu chuẩn để kiểm nghiệm và đánh giá.</p>
                 </div>
               </div>
 
 
               <div className="philosophy-quote" style={{ marginTop: '16px' }}>
-                "Thực tiễn là tiêu chuẩn chân lý duy nhất."
-                <strong>— C. Mác</strong>
+                Luận điểm phương pháp luận: <strong>Thực tiễn là tiêu chuẩn kiểm nghiệm chân lý</strong>.
               </div>
 
-              <button className="btn-cosmic ui-interactive" style={{ marginTop: '24px' }}
-                onClick={() => scrollToChapter(5)}>
-                Trang VI: Lời kết & Tổng hợp cuối <ArrowDown size={14} />
-              </button>
+              
             </BookSpread>
           </motion.section>
         )}
@@ -443,8 +477,8 @@ export default function StoryContent({
               <h2>Tổng Hợp Biện Chứng & Thông Điệp Gửi Sinh Viên</h2>
 
               <p style={{ fontSize: '0.95rem', marginBottom: '20px', color: 'var(--ink-soft)' }}>
-                Sau khi phân tích case study A & B qua bốn cặp phạm trù, nhóm khẳng định thành công
-                trong lao động đến từ năng lực thực chiến được kiểm nghiệm bằng thực tiễn.
+                Sau khi phân tích case study A & B qua các cặp phạm trù cơ bản, nhóm khẳng định:
+                kết quả tuyển dụng chủ yếu phản ánh năng lực được kiểm nghiệm trong thực tiễn.
               </p>
 
               <table className="conclusion-table">
@@ -492,6 +526,33 @@ export default function StoryContent({
                     <li>Game narrative chọn hướng biện chứng</li>
                   </ul>
 
+                  <button
+                    className="btn-cosmic ui-interactive"
+                    style={{ padding: '10px 16px', fontSize: '0.8rem', marginBottom: '14px' }}
+                    onClick={() => setIsVideoOpen((v) => !v)}
+                  >
+                    {isVideoOpen ? 'Ẩn video' : 'Phát video'}
+                  </button>
+
+                  {isVideoOpen && (
+                    <div
+                      style={{
+                        border: '1px solid var(--line)',
+                        background: 'rgba(255,251,244,0.7)',
+                        padding: '12px',
+                        marginBottom: '18px'
+                      }}
+                    >
+                      <video
+                        ref={videoRef}
+                        src={interviewVideo}
+                        controls
+                        playsInline
+                        style={{ width: '100%', borderRadius: '10px' }}
+                      />
+                    </div>
+                  )}
+
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', marginBottom: '8px' }}>
                     <BookOpen size={14} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} />
                     Tài liệu tham khảo
@@ -513,23 +574,11 @@ export default function StoryContent({
                     </p>
                   </div>
 
-                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '22px' }}>
-                    <button className="btn-cosmic ui-interactive" onClick={() => scrollToChapter(4)}>
-                      <ArrowDown size={14} style={{ transform: 'rotate(90deg)' }} /> Trang trước
-                    </button>
-                    <button className="btn-cosmic ui-interactive" onClick={() => scrollToChapter(0)}>
-                      <RefreshCw size={14} /> Về trang bìa
-                    </button>
-                  </div>
+             
                 </div>
                 <div className="slide-media">
                   <img src={trio} alt="Mác, Ăng-ghen, Lê-nin" className="slide-image" />
-                  <img src={dialectics} alt="Biện chứng" className="slide-image"
-                    style={{ marginTop: '12px', maxHeight: '150px' }} />
-                  <p className="epilogue-credits">
-                    <Heart size={12} style={{ color: 'var(--rose)', display: 'inline' }} />
-                    {' '}Nhóm thuyết trình — Triết học Mác-Lênin
-                  </p>
+                  
                 </div>
               </div>
             </BookSpread>

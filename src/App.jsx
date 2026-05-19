@@ -9,7 +9,8 @@ import './App.css';
 
 export default function App() {
   const maxChapter = 5;
-  const [activeChapter, setActiveChapter] = useState(0);
+  const minChapter = -1;
+  const [activeChapter, setActiveChapter] = useState(minChapter);
   const [transitioning, setTransitioning] = useState(false);
   const [userChoices, setUserChoices] = useState({
     cvChoice: null,       // 'form' (A's style) or 'content' (B's style)
@@ -83,24 +84,14 @@ export default function App() {
       }
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        scrollToChapter(Math.max(activeChapter - 1, 0));
+        scrollToChapter(Math.max(activeChapter - 1, minChapter));
       }
     };
 
-    const handleClick = (e) => {
-      if (e.button !== 0) return;
-      if (e.defaultPrevented) return;
-      const target = e.target;
-      if (target.closest('button, a, .ui-interactive, [role="button"], input, textarea, select, label')) return;
-      scrollToChapter(Math.min(activeChapter + 1, maxChapter));
-    };
-
     document.addEventListener('keydown', handleKey);
-    document.addEventListener('click', handleClick);
 
     return () => {
       document.removeEventListener('keydown', handleKey);
-      document.removeEventListener('click', handleClick);
     };
   }, [activeChapter]);
 

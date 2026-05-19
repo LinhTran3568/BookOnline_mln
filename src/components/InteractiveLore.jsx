@@ -7,25 +7,25 @@ const PHILOSOPHY_LORE = {
     title: '1. Cặp phạm trù: Nội dung & Hình thức',
     icon: <Layers size={24} style={{ color: 'var(--rose)' }} />,
     concept: 'Nội dung là tổng hợp tất cả những mặt, những yếu tố, những quá trình tạo nên sự vật. Hình thức là phương thức tồn tại và phát triển của sự vật, là hệ thống các mối liên hệ tương đối bền vững giữa các yếu tố của nó.',
-    analysis: 'Trong tình huống trên:\n- **Nội dung (Content):** Năng lực thực chiến, kiến thức chuyên môn áp dụng được vào công việc của ứng viên.\n- **Hình thức (Form):** Thiết kế CV, những từ khóa đao to búa lớn (Proactive, Leadership...), hay tấm bằng tốt nghiệp loại Giỏi/Khá.\n\n**Biện chứng tuyển dụng:** Triết học Mác - Lênin chỉ ra: *Nội dung quyết định hình thức*. Hình thức chỉ có giá trị khi nó biểu đạt đúng nội dung thực tế. Sinh viên A sở hữu hình thức cực kỳ hào nhoáng (CV đẹp, toàn từ khóa khủng, bằng Giỏi) nhưng nội dung bên trong lại trống rỗng (không giải quyết được bài toán phỏng vấn). Ngược lại, sinh viên B có hình thức đơn giản (CV giản dị, bằng Khá) nhưng chứa đựng nội dung thực chất vượt trội (giải quyết trực tiếp bài toán thực tế của công ty). Việc doanh nghiệp chọn B là hoàn toàn hợp quy luật biện chứng.'
+    analysis: 'Trong tình huống trên:\n- **Nội dung:** năng lực chuyên môn có thể vận dụng, tư duy giải quyết vấn đề, kinh nghiệm dự án/việc làm cụ thể.\n- **Hình thức:** cách trình bày CV, cách “đóng gói” thành tích, danh mục kỹ năng/từ khóa, bằng cấp.\n\n**Vận dụng:** Theo phép biện chứng duy vật, *nội dung giữ vai trò quyết định đối với hình thức*. CV chỉ thực sự có ý nghĩa khi phản ánh đúng và làm nổi bật năng lực thực tế. Trường hợp A đầu tư nhiều vào hình thức nhưng thiếu minh chứng năng lực giải quyết vấn đề; còn B trình bày giản dị nhưng chứng minh được năng lực qua nhiệm vụ cụ thể. Vì vậy, kết quả tuyển dụng phù hợp với yêu cầu khách quan của công việc.'
   },
   essencePhenomenon: {
     title: '2. Cặp phạm trù: Bản chất & Hiện tượng',
     icon: <Search size={24} style={{ color: 'var(--gold-deep)' }} />,
     concept: 'Bản chất là tổng hợp tất cả những mặt, những mối liên hệ tất nhiên, tương đối ổn định bên trong sự vật, quyết định sự vận động và phát triển của sự vật đó. Hiện tượng là sự biểu hiện ra bên ngoài của bản chất.',
-    analysis: 'Trong tình huống trên:\n- **Hiện tượng (Phenomenon):** Tấm bằng xuất sắc, bộ hồ sơ lộng lẫy và kỹ năng phỏng vấn lý thuyết trôi chảy của A. Đây là những thứ dễ dàng phơi bày ra bên ngoài.\n- **Bản chất (Essence):** Khả năng tư duy logic, thái độ thực tế và trình độ chuyên môn sâu sắc giải quyết được khủng hoảng của ứng viên.\n\n**Biện chứng tuyển dụng:** Triết học khẳng định: *Bản chất quyết định hiện tượng*, và *hiện tượng có thể phản ánh không đầy đủ hoặc xuyên tạc bản chất*. Một chiếc CV đẹp (hiện tượng) chưa chắc biểu thị một nhân sự chất lượng (bản chất). Nhà tuyển dụng tại tập đoàn lớn là những người có kinh nghiệm, họ không bị đánh lừa bởi hiện tượng hào nhoáng của A mà chủ động thiết lập bài test thực chiến để bóc tách và kiểm tra bản chất của cả hai. Sinh viên B đã bộc lộ bản chất xuất sắc của mình qua việc giải toán thực tế.'
+    analysis: 'Trong tình huống trên:\n- **Hiện tượng:** bằng cấp, hình thức CV, cách diễn đạt/“tự giới thiệu” trong phỏng vấn.\n- **Bản chất:** năng lực thực sự (tư duy, phương pháp làm việc, khả năng xử lý vấn đề) thể hiện ổn định qua hành động.\n\n**Vận dụng:** *Bản chất quyết định hiện tượng*, nhưng hiện tượng có thể phản ánh chưa đầy đủ bản chất. Vì vậy, doanh nghiệp thường dùng bài test/thử việc để “đi sâu” từ biểu hiện bên ngoài tới năng lực bên trong. Trường hợp B giải được bài toán thực tế giúp bộc lộ bản chất năng lực; còn A cho thấy khoảng cách giữa biểu hiện hồ sơ và năng lực cần thiết.'
   },
   necessityChance: {
     title: '3. Cặp phạm trù: Tất nhiên & Ngẫu nhiên',
     icon: <Shuffle size={24} style={{ color: 'var(--rose)' }} />,
     concept: 'Tất nhiên (tất yếu) là cái do những nguyên nhân cơ bản bên trong của sự vật quyết định và trong những điều kiện nhất định nó phải xảy ra như thế chứ không thể khác. Ngẫu nhiên là cái không do mối liên hệ bản chất quyết định mà do các nhân tố bên ngoài, có thể xảy ra hoặc không.',
-    analysis: 'Trong tình huống trên:\n- **Ngẫu nhiên (Chance):** Suy nghĩ ấm ức của A cho rằng B trúng tuyển chỉ vì ăn may hoặc có người quen nâng đỡ.\n- **Tất nhiên (Necessity):** Quy luật cạnh tranh khốc liệt của thị trường lao động. Doanh nghiệp cần người làm được việc để vận hành bộ máy và tối ưu chi phí. Việc người có năng lực giải quyết vấn đề (B) được chọn và người chỉ có lý thuyết suông (A) bị loại là kết quả **Tất yếu** khách quan.\n\n**Biện chứng tuyển dụng:** Triết học chỉ ra: *Cái ngẫu nhiên chỉ là hình thức biểu hiện của cái tất nhiên*. Đằng sau cái tưởng chừng như may mắn (ngẫu nhiên) của B là cả một quá trình tích lũy năng lực thực tế âm thầm (tất nhiên). Sự đổ lỗi của A cho thấy sự thiếu sót trong nhận thức biện chứng, nhầm lẫn giữa nguyên nhân tất yếu khách quan và sự may rủi ngẫu nhiên.'
+    analysis: 'Trong tình huống trên:\n- **Ngẫu nhiên:** cảm giác của A rằng B “gặp may”, hoặc giả định có yếu tố ngoài năng lực.\n- **Tất nhiên:** yêu cầu khách quan của vị trí công việc và tiêu chí đánh giá dựa trên hiệu quả giải quyết nhiệm vụ.\n\n**Vận dụng:** Trong cách nhìn biện chứng, ngẫu nhiên thường là hình thức biểu hiện của tất nhiên: kết quả bề ngoài có thể “trông như may mắn”, nhưng thường dựa trên quá trình tích lũy năng lực, gặp đúng điều kiện và bộc lộ đúng lúc. Vì vậy, không nên tuyệt đối hóa ngẫu nhiên để phủ nhận các nguyên nhân khách quan.'
   },
   possibilityReality: {
     title: '4. Cặp phạm trù: Khả năng & Hiện thực',
     icon: <FileText size={24} style={{ color: '#2c5f7a' }} />,
     concept: 'Khả năng là cái chưa có, nhưng sẽ có, sẽ xảy ra khi có các điều kiện thích hợp. Hiện thực là cái đang có, đang tồn tại thực sự.',
-    analysis: 'Trong tình huống trên:\n- **Khả năng (Possibility):** Bằng Giỏi và CV hoành tráng của A. Nó chỉ đại diện cho một *khả năng* tiềm tàng rằng A có thể làm tốt công việc trong tương lai.\n- **Hiện thực (Reality):** Hành động thực tế giải quyết bài toán khủng hoảng của công ty ngay tại bàn phỏng vấn của B. Đây là kết quả thực tế, đóng góp giá trị ngay lập tức.\n\n**Biện chứng tuyển dụng:** Doanh nghiệp luôn vận hành dựa trên hiện thực để sinh tồn. Họ cần những kết quả hiện hữu thay vì những hứa hẹn tiềm năng nằm trên giấy tờ. Bằng cách hiện thực hóa kỹ năng của mình qua bài toán thực tế, B đã biến khả năng thành hiện thực thuyết phục, đánh bại hoàn toàn hồ sơ lý thuyết của A.'
+    analysis: 'Trong tình huống trên:\n- **Khả năng:** tiềm năng thể hiện qua kết quả học tập, kiến thức tích lũy, các chứng chỉ/dự án ở mức “cam kết trên giấy”.\n- **Hiện thực:** năng lực đã được kiểm chứng bằng hành động và kết quả cụ thể trong điều kiện làm việc/đánh giá thực tế.\n\n**Vận dụng:** Bằng cấp và hồ sơ có thể chỉ ra khả năng, nhưng chỉ khi có điều kiện thích hợp (bài test, nhiệm vụ) thì khả năng mới được chuyển hóa thành hiện thực. B thuyết phục nhà tuyển dụng bằng kết quả xử lý vấn đề; A chưa biến được khả năng thành giải pháp có thể kiểm chứng.'
   }
 };
 
@@ -86,18 +86,7 @@ export default function InteractiveLore({ activeTab, isOpen, onClose }) {
                 </div>
               </div>
 
-              <div className="lore-block lore-block--tip">
-                <CheckCircle2 size={18} className="lore-tip-icon" />
-                <div>
-                  <h4>Từ khóa Ghi Điểm Thuyết Trình</h4>
-                  <p>
-                    Vận dụng cặp phạm trù này để phản bác luận điểm{' '}
-                    <strong>chủ nghĩa duy tâm chủ quan</strong> hoặc{' '}
-                    <strong>tư duy siêu hình</strong> của sinh viên A khi đổ lỗi cho ngoại cảnh
-                    thay vì tự phê bình năng lực.
-                  </p>
-                </div>
-              </div>
+              
             </div>
           </motion.div>
         </motion.div>
