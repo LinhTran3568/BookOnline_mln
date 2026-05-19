@@ -53,29 +53,6 @@ function CameraController({ activeChapter, mousePos }) {
   return null;
 }
 
-function WarmBackground() {
-  return (
-    <>
-      <mesh position={[0, 0, -8]} scale={[30, 20, 1]}>
-        <planeGeometry />
-        <meshBasicMaterial
-          color="#f3ebe0"
-          transparent
-          opacity={0.95}
-        />
-      </mesh>
-      <mesh position={[0, 2, -6]} scale={[18, 12, 1]}>
-        <planeGeometry />
-        <meshBasicMaterial
-          color="#d9bf8e"
-          transparent
-          opacity={0.08}
-        />
-      </mesh>
-    </>
-  );
-}
-
 function GoldenDust({ count = 80 }) {
   const ref = useRef();
   const positions = useMemo(() => {
@@ -238,7 +215,6 @@ export default function ThreeCanvas({ activeChapter }) {
         <directionalLight position={[-4, 2, -2]} intensity={0.2} color="#fca5a5" />
         <pointLight position={[0, 3, 2]} intensity={0.3} color="#d9bf8e" />
 
-        <WarmBackground />
         <GoldenDust />
         <FallingLeaves mousePos={mousePos} />
         <CameraController activeChapter={activeChapter} mousePos={mousePos} />

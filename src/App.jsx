@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ThreeCanvas from './components/ThreeCanvas';
 import Header from './components/Header';
 import StoryContent from './components/StoryContent';
@@ -8,6 +8,7 @@ import AutumnLeaves from './components/AutumnLeaves';
 import './App.css';
 
 export default function App() {
+  const maxChapter = 5;
   const [activeChapter, setActiveChapter] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [userChoices, setUserChoices] = useState({
@@ -73,6 +74,35 @@ export default function App() {
       activeTab: tabId
     });
   };
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollToChapter(Math.min(activeChapter + 1, maxChapter));
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollToChapter(Math.max(activeChapter - 1, 0));
+      }
+    };
+
+    const handleClick = (e) => {
+      if (e.button !== 0) return;
+      if (e.defaultPrevented) return;
+      const target = e.target;
+      if (target.closest('button, a, .ui-interactive, [role="button"], input, textarea, select, label')) return;
+      scrollToChapter(Math.min(activeChapter + 1, maxChapter));
+    };
+
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.removeEventListener('click', handleClick);
+    };
+  }, [activeChapter]);
 
   return (
     <div className="app-container">

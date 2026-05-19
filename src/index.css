@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap');
+
 :root {
   /* Color Palette - Elegant Fine-Art Antique/Museum Theme */
   --bg: #f3ebe0;          /* Antique warm cream linen/paper */
@@ -13,12 +15,12 @@
   --mist: rgba(255, 251, 244, 0.88); /* Warm soft fog overlay */
   --line: rgba(26, 21, 37, 0.18);    /* Delicate ink line */
   
-  /* Fine-Art Fonts */
-  --font-serif: 'Italiana', serif;
-  --font-garamond: 'Cormorant Garamond', serif;
-  --font-script: 'Pinyon Script', cursive;
+  /* Fine-Art Fonts (triet-hoc-sv) */
+  --font-serif: 'Playfair Display', serif;
+  --font-garamond: 'EB Garamond', serif;
+  --font-script: 'Cinzel Decorative', serif;
   --font-roman: 'Cinzel', serif;
-  --font-infant: 'Cormorant Infant', serif;
+  --font-infant: 'EB Garamond', serif;
 }
 
 * {
@@ -30,9 +32,7 @@
 
 /* Base body — scrollable online book */
 body {
-  background:
-    radial-gradient(ellipse at 50% 0%, #faf3e8 0%, var(--bg) 40%, var(--bg-warm) 100%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8945a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-garamond);
   overflow-x: hidden;
@@ -49,10 +49,14 @@ body {
 }
 
 /* Typography elements */
-h1, h2, h3, .cinzel {
+h1, h2, h3 {
   font-family: var(--font-serif);
   font-weight: 400;
   letter-spacing: 1px;
+}
+
+.cinzel {
+  font-family: var(--font-roman);
 }
 
 /* Background Canvas Layer */

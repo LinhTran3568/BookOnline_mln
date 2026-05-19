@@ -35,20 +35,6 @@ export default function Header({ activeChapter, userChoices, scrollToChapter }) 
         <span className="italic">academy</span>
       </a>
 
-      <div className="top-bar__hud hide-mobile">
-        <div className="hud-pill">
-          <GraduationCap size={13} style={{ color: 'var(--rose)' }} />
-          <span>Nhận thức</span>
-          <strong>{getPhilosophyInsight()}%</strong>
-        </div>
-        {choiceLabel && (
-          <div className="hud-pill hud-pill--gold" title={`Quan điểm: ${choiceLabel}`}>
-            <span>Quan điểm</span>
-            <strong>{choiceLabel}</strong>
-          </div>
-        )}
-      </div>
-
       <Soundscape />
     </header>
   );
