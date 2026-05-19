@@ -37,7 +37,7 @@ export default function Soundscape() {
       const masterGain = ctx.createGain();
       masterGain.gain.setValueAtTime(0, ctx.currentTime);
       // Fade in master volume to avoid clicks
-      masterGain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 2.0);
+      masterGain.gain.linearRampToValueAtTime(0.52, ctx.currentTime + 1.5);
       
       // 3. Low Pass Filter (adds warmth and space feeling)
       const filter = ctx.createBiquadFilter();
@@ -92,7 +92,7 @@ export default function Soundscape() {
         osc.detune.setValueAtTime((Math.random() - 0.5) * 15, ctx.currentTime);
         
         // Low amplitude per oscillator
-        oscGain.gain.setValueAtTime(0.05, ctx.currentTime);
+        oscGain.gain.setValueAtTime(0.09, ctx.currentTime);
         
         // Connect osc to filter
         osc.connect(oscGain);
@@ -117,7 +117,7 @@ export default function Soundscape() {
         
         // Quick fade-in, slow fade-out
         starGain.gain.setValueAtTime(0, ctx.currentTime);
-        starGain.gain.linearRampToValueAtTime(0.012, ctx.currentTime + 0.1);
+        starGain.gain.linearRampToValueAtTime(0.028, ctx.currentTime + 0.1);
         starGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 3.5);
         
         // Connect to delay/filter for space feel

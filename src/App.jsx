@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import ThreeCanvas from './components/ThreeCanvas';
 import Header from './components/Header';
 import StoryContent from './components/StoryContent';
 import InteractiveLore from './components/InteractiveLore';
 import CustomCursor from './components/CustomCursor';
-import Soundscape from './components/Soundscape';
+import AutumnLeaves from './components/AutumnLeaves';
 import './App.css';
 
 export default function App() {
@@ -16,8 +16,10 @@ export default function App() {
   });
   const [loreModal, setLoreModal] = useState({
     isOpen: false,
-    activeTab: 'contentForm' // 'contentForm', 'essencePhenomenon', 'necessityChance', 'possibilityReality'
+    activeTab: 'contentForm'
   });
+  const [bookTurning, setBookTurning] = useState(false);
+  const bookViewportRef = useRef(null);
 
   // 1. Gilded Map Sweep transition coordinator
   const scrollToChapter = (chapterId) => {
@@ -25,8 +27,11 @@ export default function App() {
     
     // Activate the slanted golden sweep curtain!
     setTransitioning(true);
+    setBookTurning(true);
+    if (bookViewportRef.current) {
+      bookViewportRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // Midway through the sweep (700ms), update the content behind the curtain
     setTimeout(() => {
       setActiveChapter(chapterId);
       if (chapterId === 0) {
@@ -40,6 +45,7 @@ export default function App() {
     // Turn off transitioning once the curtain sweeps completely off the screen
     setTimeout(() => {
       setTransitioning(false);
+      setBookTurning(false);
     }, 1450);
   };
 
@@ -73,8 +79,10 @@ export default function App() {
       {/* Golden Shimmer Map Curtain Overlay */}
       {transitioning && <div className="transition-curtain-overlay active" />}
 
-      {/* Immersive 3D Canvas Background */}
-      <ThreeCanvas activeChapter={activeChapter} userChoices={userChoices} />
+      <div className="parchment-texture" aria-hidden="true" />
+      <AutumnLeaves count={32} />
+
+      <ThreeCanvas activeChapter={activeChapter} />
 
       {/* Classic Gilded Greek/Academic Columns Background Overlay */}
       <div className="columns-bg">
@@ -133,9 +141,6 @@ export default function App() {
         </svg>
       </div>
 
-      {/* Floating Procedural Audio Player */}
-      <Soundscape />
-
       {/* Custom High-Performance Cursor Tracker */}
       <CustomCursor />
 
@@ -146,14 +151,19 @@ export default function App() {
         scrollToChapter={scrollToChapter} 
       />
 
-      {/* Interactive Story Timeline HUD (Right side) */}
-      <nav className="story-progress-indicator" aria-label="Story chapters timeline">
+      <footer className="bottom-hud">
+        <div className="sound-indicator">
+          <span className="pulse-dot" />
+          <span className="cinzel">Triết học Mác-Lênin</span>
+        </div>
+        <nav className="story-progress-indicator" aria-label="Story chapters timeline">
         {[
           { id: 0, label: 'Khởi đầu' },
           { id: 1, label: 'So sánh CV' },
           { id: 2, label: 'Phòng phỏng vấn' },
           { id: 3, label: 'Ấm ức của A' },
-          { id: 4, label: 'Bài học biện chứng' }
+          { id: 4, label: 'Bài học biện chứng' },
+          { id: 5, label: 'Lời kết' }
         ].map((item) => (
           <button
             key={item.id}
@@ -165,23 +175,21 @@ export default function App() {
             <span className="progress-dot-label cinzel">{item.label}</span>
           </button>
         ))}
-      </nav>
+        </nav>
+      </footer>
 
-      {/* Ambient status indicator (Left-bottom corner) */}
-      <div className="sound-indicator">
-        <span className="pulse-dot"></span>
-        <span className="cinzel" style={{ fontSize: '0.65rem' }}>SYSTEM: PHÂN TÍCH TRIẾT HỌC MÁC-LÊNIN</span>
-      </div>
-
-      {/* Main scrolling storytelling layer */}
-      <main>
-        <StoryContent 
-          activeChapter={activeChapter}
-          userChoices={userChoices}
-          onMakeChoice={makeChoice}
-          onOpenLore={openLore}
-          scrollToChapter={scrollToChapter}
-        />
+      <main className="book-viewport" ref={bookViewportRef}>
+        <div className={`book-stage ${bookTurning ? 'book-turning' : ''}`}>
+          <div className={`book-3d ${bookTurning ? 'is-turning' : ''}`}>
+            <StoryContent
+              activeChapter={activeChapter}
+              userChoices={userChoices}
+              onMakeChoice={makeChoice}
+              onOpenLore={openLore}
+              scrollToChapter={scrollToChapter}
+            />
+          </div>
+        </div>
       </main>
 
       {/* Lore Artifact Overlay Modal */}
