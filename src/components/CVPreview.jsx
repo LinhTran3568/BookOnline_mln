@@ -28,15 +28,15 @@ export default function CVPreview({ variant = 'a', portrait }) {
         <h5><Briefcase size={13} /> Kinh nghiệm</h5>
         {isA ? (
           <ul>
-            <li>Thực tập Marketing — thiết kế slide, viết báo cáo</li>
-            <li>Tham gia 3 cuộc thi ý tưởng khởi nghiệp (vai trò thuyết trình)</li>
-            <li>Chưa có dự án phần mềm triển khai production</li>
+            <li>CLB CNTT trường — tham gia workshop, ghi “hoạt động ngoại khóa” trên CV</li>
+            <li>Đồ án tốt nghiệp: giao diện bắt mắt, báo cáo dày; demo chạy cục bộ, chưa deploy production</li>
+            <li>Hackathon 2 lần — phụ trách slide & pitch; sản phẩm dừng ở prototype, chưa có mã vận hành thật</li>
           </ul>
         ) : (
           <ul>
-            <li>Freelance: sửa lỗi API, tối ưu query SQL cho SME</li>
-            <li>Dự án GitHub: 2 repo backend (Node.js) có CI/CD</li>
-            <li>Fix bug hệ thống logistics — giảm 40% timeout</li>
+            <li>Freelance: sửa lỗi API, tối ưu query SQL cho SME — chuỗi F&amp;B Golden Gate (đặt bàn / POS)</li>
+            <li>Dự án GitHub + triển khai thử: 2 repo backend Node.js, CI/CD — hợp tác startup EdTech EduPath</li>
+            <li>Fix bug module tracking — J&amp;T Express Việt Nam (logistics), giảm 40% timeout</li>
           </ul>
         )}
       </section>
@@ -45,7 +45,7 @@ export default function CVPreview({ variant = 'a', portrait }) {
         <h5>{isA ? <Palette size={13} /> : <Code size={13} />} {isA ? 'Điểm nhấn CV' : 'Kỹ năng kỹ thuật'}</h5>
         {isA ? (
           <div className="cv-tags cv-tags--flashy">
-            {['Leadership', 'Proactive', 'Teamwork', 'Innovation', 'Synergy'].map((t) => (
+            {['Agile Mindset', 'Problem Solver', 'Full-stack Ready', 'Fast Learner', 'Team Player'].map((t) => (
               <span key={t}>{t}</span>
             ))}
           </div>
@@ -61,11 +61,17 @@ export default function CVPreview({ variant = 'a', portrait }) {
       <footer className="cv-card__footer">
         {isA ? (
           <p className="cv-note cv-note--warn">
-            <Star size={12} /> CV gradient đầy màu — nhấn mạnh <em>hình thức</em>, ít bằng chứng thực chiến
+            <Star size={12} aria-hidden="true" />
+            <span>
+              CV gradient đầy màu — nhấn mạnh <em>hình thức</em>, ít bằng chứng thực chiến
+            </span>
           </p>
         ) : (
           <p className="cv-note cv-note--good">
-            <Award size={12} /> CV tối giản — <em>nội dung</em> cụ thể, có link repo & mô tả task
+            <Award size={12} aria-hidden="true" />
+            <span>
+              CV tối giản — <em>nội dung</em> cụ thể, có link repo & mô tả task
+            </span>
           </p>
         )}
       </footer>

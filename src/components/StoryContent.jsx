@@ -9,7 +9,6 @@ import {
   Search,
   Sparkles,
   Target,
-  Users
 } from 'lucide-react';
 import CVPreview from './CVPreview';
 
@@ -23,7 +22,7 @@ import lenin from '../assets/lenin.png';
 import heroImg from '../assets/hero.png';
 import interviewVideo from '../assets/1805.mp4';
 
-const PAGE_NUMBERS = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+const PAGE_NUMBERS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 function BookSpread({ pageIndex, children }) {
   const showPageNumbers =
@@ -319,62 +318,64 @@ export default function StoryContent({
             exit="exit"
           >
             <BookSpread pageIndex={2}>
-              <span className="chapter-badge">Trang III • Khả năng & Hiện thực | Bản chất & Hiện tượng</span>
-              <h2>Bản chất — Hiện tượng & Khả năng — Hiện thực trong phỏng vấn</h2>
+              <span className="chapter-badge">Trang III • Cặp phạm trù Bản chất & Hiện tượng</span>
+              <h2>Bản chất — Hiện tượng trong phỏng vấn</h2>
 
               <p>
-                Nhà tuyển dụng đưa ra bài test xử lý lỗi hệ thống đang vận hành.
-                Về mặt phương pháp luận, đây là “điều kiện” để kiểm tra: (1) <strong>bản chất</strong> năng lực (bên trong) có thực sự tương ứng
-                với <strong>hiện tượng</strong> hồ sơ (bên ngoài) hay không; (2) ứng viên có chuyển <strong>khả năng</strong> (tiềm năng) thành
-                <strong>hiện thực</strong> (kết quả/giải pháp) hay không.
+                Vòng phỏng vấn kỹ thuật buộc nhà tuyển dụng nhìn sâu hơn lớp <strong>hiện tượng</strong> (bằng cấp, CV, cách diễn đạt)
+                để chạm tới <strong>bản chất</strong> năng lực bên trong. Bài test xử lý lỗi là thước đo mức độ tương ứng
+                giữa biểu hiện bên ngoài và năng lực thực tế.
               </p>
 
-              <div className="interview-scene">
-                <div className="interview-panel interview-panel--fail">
-                  <img src={studentA} alt="A trong phỏng vấn" style={{ width: '100%', maxHeight: '140px', objectFit: 'contain', marginBottom: '10px' }} />
-                  <h4 style={{ color: 'var(--rose)', fontFamily: 'var(--font-roman)', fontSize: '0.8rem', letterSpacing: '2px' }}>SINH VIÊN A</h4>
-                  <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--ink-soft)' }}>
-                    Trình bày trôi chảy khái niệm, thuật ngữ — nhưng lúng túng khi phân tích log và khoanh vùng nguyên nhân.
-                    Điều này cho thấy “hiện tượng” (hồ sơ, lời nói) không đủ để đảm bảo “bản chất” năng lực đáp ứng yêu cầu.
-                  </p>
+              <div className="pair-panel pair-panel--grid">
+                <article className="pair-panel__card pair-panel__card--a">
+                  <img src={studentA} alt="Sinh viên A" />
+                  <div className="pair-panel__content">
+                    <h4>Sinh viên A</h4>
+                    <p>
+                      Trình bày trôi chảy khái niệm, thuật ngữ — nhưng lúng túng khi phân tích log.
+                      Hiện tượng (hồ sơ Giỏi, lời nói tự tin) không phản ánh đủ bản chất năng lực kỹ thuật.
+                    </p>
+                  </div>
+                </article>
+                <article className="pair-panel__card pair-panel__card--b">
+                  <img src={studentB} alt="Sinh viên B" />
+                  <div className="pair-panel__content">
+                    <h4>Sinh viên B</h4>
+                    <p>
+                      Hồ sơ tối giản — thao tác phân tích lỗi có hệ thống bộc lộ bản chất năng lực
+                      ổn định, vượt xa vỏ hiện tượng bên ngoài.
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div className="slide-layout" style={{ alignItems: 'flex-start', marginTop: '8px' }}>
+                <div className="slide-text">
+                  <div className="philosophy-quote">
+                    Luận điểm phương pháp luận: <strong>Bản chất quyết định hiện tượng</strong>.
+                    Hiện tượng có thể phản ánh chưa đầy đủ bản chất — cần kiểm chứng bằng thực tiễn,
+                    không dừng ở lời nói hay hình thức hồ sơ.
+                  </div>
+                  <button
+                    className="btn-cosmic ui-interactive"
+                    style={{ padding: '8px 14px', fontSize: '0.72rem', alignSelf: 'flex-start' }}
+                    onClick={() => onOpenLore('essencePhenomenon')}
+                  >
+                    <Search size={12} /> Lý thuyết Bản chất & Hiện tượng
+                  </button>
                 </div>
-                <div className="interview-panel interview-panel--pass">
-                  <img src={studentB} alt="B sửa hệ thống" style={{ width: '100%', maxHeight: '140px', objectFit: 'contain', marginBottom: '10px' }} />
-                  <h4 style={{ color: '#2c5f7a', fontFamily: 'var(--font-roman)', fontSize: '0.8rem', letterSpacing: '2px' }}>SINH VIÊN B</h4>
-                  <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--ink-soft)' }}>
-                    Phân tích lỗi theo quy trình, đề xuất phương án khả thi và chứng minh bằng thao tác cụ thể.
-                    Khả năng tiềm tàng được hiện thực hóa thành kết quả, qua đó bộc lộ bản chất năng lực.
-                  </p>
+                <div className="slide-media">
+                  <img src={dialectics} alt="Biện chứng" className="slide-image" style={{ maxHeight: '220px' }} />
                 </div>
               </div>
-
-              <div className="philosophy-quote">
-                Luận điểm nhận thức luận (tóm lược ý của Lê-nin): nhận thức không dừng ở lời nói/khái niệm,
-                mà phải quay trở về <strong>thực tiễn</strong> để kiểm nghiệm.
-              </div>
-
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', margin: '16px 0' }}>
-                <button className="btn-cosmic ui-interactive" style={{ padding: '8px 14px', fontSize: '0.72rem' }}
-                  onClick={() => onOpenLore('possibilityReality')}>
-                  <FileText size={12} /> Khả năng & Hiện thực
-                </button>
-                <button className="btn-cosmic ui-interactive" style={{ padding: '8px 14px', fontSize: '0.72rem' }}
-                  onClick={() => onOpenLore('essencePhenomenon')}>
-                  <Search size={12} /> Bản chất & Hiện tượng
-                </button>
-              </div>
-
-              <img src={dialectics} alt="Biện chứng" className="slide-image"
-                style={{ maxHeight: '200px', margin: '16px auto', display: 'block' }} />
-
-             
             </BookSpread>
           </motion.section>
         )}
 
         {activeChapter === 3 && (
           <motion.section
-            key="chapter-3"
+            key="chapter-3-interview"
             className="story-section"
             variants={slideVariants}
             initial="hidden"
@@ -382,7 +383,76 @@ export default function StoryContent({
             exit="exit"
           >
             <BookSpread pageIndex={3}>
-              <span className="chapter-badge">Trang IV • Tất nhiên & Ngẫu nhiên</span>
+              <span className="chapter-badge">Trang IV • Cặp phạm trù Khả năng & Hiện thực</span>
+              <h2>Khả năng — Hiện thực trong phỏng vấn</h2>
+
+              <p>
+                Cùng bối cảnh bài test kỹ thuật, góc nhìn <strong>Khả năng — Hiện thực</strong> nhấn mạnh:
+                kiến thức và kinh nghiệm trên giấy chỉ biểu hiện <strong>khả năng</strong> (tiềm năng).
+                Chỉ khi có <strong>điều kiện thích hợp</strong> — bài test, nhiệm vụ cụ thể — khả năng mới chuyển hóa
+                thành <strong>hiện thực</strong> (kết quả có thể kiểm chứng).
+              </p>
+
+              <div className="concept-flow" aria-label="Quy trình khả năng thành hiện thực">
+                <span className="concept-flow__item">Khả năng</span>
+                <span className="concept-flow__sep" aria-hidden="true">→</span>
+                <span className="concept-flow__item">Điều kiện</span>
+                <span className="concept-flow__sep" aria-hidden="true">→</span>
+                <span className="concept-flow__item">Hiện thực</span>
+              </div>
+
+              <div className="pair-panel pair-panel--rows">
+                <article className="pair-panel__row pair-panel__row--a">
+                  <img src={studentA} alt="Sinh viên A" />
+                  <div className="pair-panel__content">
+                    <h4>Sinh viên A</h4>
+                    <ul className="pair-panel__points">
+                      <li><strong>Khả năng:</strong> điểm Giỏi, chứng chỉ, vốn lý thuyết</li>
+                      <li><strong>Điều kiện:</strong> có bài test kỹ thuật</li>
+                      <li><strong>Hiện thực:</strong> chưa tạo được giải pháp xử lý lỗi</li>
+                    </ul>
+                  </div>
+                </article>
+                <article className="pair-panel__row pair-panel__row--b">
+                  <img src={studentB} alt="Sinh viên B" />
+                  <div className="pair-panel__content">
+                    <h4>Sinh viên B</h4>
+                    <ul className="pair-panel__points">
+                      <li><strong>Khả năng:</strong> kinh nghiệm dự án, tư duy thực chiến</li>
+                      <li><strong>Điều kiện:</strong> bài test trong phòng phỏng vấn</li>
+                      <li><strong>Hiện thực:</strong> sửa hệ thống thành công, có thể kiểm chứng</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              <div className="philosophy-quote">
+                Luận điểm nhận thức luận: nhận thức không dừng ở khái niệm hay “cam kết trên giấy”,
+                mà phải quay trở về <strong>thực tiễn</strong> — nơi khả năng được kiểm nghiệm và hiện thực hóa.
+              </div>
+
+              <button
+                className="btn-cosmic ui-interactive"
+                style={{ padding: '8px 14px', fontSize: '0.72rem', marginTop: '4px' }}
+                onClick={() => onOpenLore('possibilityReality')}
+              >
+                <FileText size={12} /> Lý thuyết Khả năng & Hiện thực
+              </button>
+            </BookSpread>
+          </motion.section>
+        )}
+
+        {activeChapter === 4 && (
+          <motion.section
+            key="chapter-4"
+            className="story-section"
+            variants={slideVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <BookSpread pageIndex={4}>
+              <span className="chapter-badge">Trang V • Tất nhiên & Ngẫu nhiên</span>
               <h2>Mở rộng: Tất nhiên — Ngẫu nhiên và cách lý giải “ăn may”</h2>
 
               <div className="slide-layout">
@@ -420,16 +490,16 @@ export default function StoryContent({
           </motion.section>
         )}
 
-        {activeChapter === 4 && (
+        {activeChapter === 5 && (
           <motion.section
-            key="chapter-4"
+            key="chapter-5"
             className="story-section"
             variants={slideVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <BookSpread pageIndex={4}>
+            <BookSpread pageIndex={5}>
               <span className="chapter-badge" style={{ color: 'var(--rose)' }}>
                 <Target size={14} /> KẾT LUẬN BÀI THUYẾT TRÌNH NHÓM
               </span>
@@ -466,16 +536,16 @@ export default function StoryContent({
           </motion.section>
         )}
 
-        {activeChapter === 5 && (
+        {activeChapter === 6 && (
           <motion.section
-            key="chapter-5"
+            key="chapter-6"
             className="story-section"
             variants={slideVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <BookSpread pageIndex={5}>
+            <BookSpread pageIndex={6}>
               <span className="chapter-badge" style={{ color: 'var(--gold-deep)' }}>
                 <BookMarked size={14} /> TRANG KẾT • LỜI KẾT CUỐI
               </span>
@@ -520,17 +590,6 @@ export default function StoryContent({
 
               <div className="slide-layout" style={{ marginTop: '24px' }}>
                 <div className="slide-text">
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', marginBottom: '10px' }}>
-                    <Users size={15} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} />
-                    Gợi ý sản phẩm sáng tạo
-                  </h3>
-                  <ul style={{ fontSize: '0.88rem', lineHeight: 1.75, color: 'var(--ink-soft)', paddingLeft: '20px', marginBottom: '18px' }}>
-                    <li>Video phỏng vấn giả lập A vs B</li>
-                    <li>Short film / motion graphic 4 cặp phạm trù</li>
-                    <li>Infographic so sánh 2 CV</li>
-                    <li>Game narrative chọn hướng biện chứng</li>
-                  </ul>
-
                   <button
                     className="btn-cosmic ui-interactive"
                     style={{ padding: '10px 16px', fontSize: '0.8rem', marginBottom: '14px' }}

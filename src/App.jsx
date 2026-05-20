@@ -8,7 +8,7 @@ import AutumnLeaves from './components/AutumnLeaves';
 import './App.css';
 
 export default function App() {
-  const maxChapter = 5;
+  const maxChapter = 6;
   const minChapter = -1;
   const [activeChapter, setActiveChapter] = useState(minChapter);
   const [transitioning, setTransitioning] = useState(false);
@@ -63,7 +63,7 @@ export default function App() {
       if (chapterKey === 'cvChoice') {
         scrollToChapter(2);
       } else if (chapterKey === 'analysisChoice') {
-        scrollToChapter(4);
+        scrollToChapter(5);
       }
     }, 1000);
   };
@@ -181,10 +181,11 @@ export default function App() {
         {[
           { id: 0, label: 'Khởi đầu' },
           { id: 1, label: 'So sánh CV' },
-          { id: 2, label: 'Phòng phỏng vấn' },
-          { id: 3, label: 'Ấm ức của A' },
-          { id: 4, label: 'Bài học biện chứng' },
-          { id: 5, label: 'Lời kết' }
+          { id: 2, label: 'Bản chất' },
+          { id: 3, label: 'Khả năng' },
+          { id: 4, label: 'Ấm ức của A' },
+          { id: 5, label: 'Bài học' },
+          { id: 6, label: 'Lời kết' }
         ].map((item) => (
           <button
             key={item.id}
