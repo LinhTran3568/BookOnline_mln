@@ -125,8 +125,9 @@ export default function StoryContent({
                   <h1
                     className="cinzel"
                     style={{
-                      fontSize: 'clamp(1.8rem, 4.6vw, 3.2rem)',
-                      fontWeight: 600,
+                      fontSize: 'clamp(2.1rem, 5.4vw, 3.7rem)',
+                      fontWeight: 700,
+                      fontFamily: 'var(--font-serif)',
                       letterSpacing: '4px',
                       marginBottom: '10px',
                       lineHeight: 1,
@@ -170,8 +171,9 @@ export default function StoryContent({
                 <h1
                   className="cinzel"
                   style={{
-                    fontSize: 'clamp(1.8rem, 4.5vw, 3.2rem)',
-                    fontWeight: 900,
+                    fontSize: 'clamp(2.2rem, 5.6vw, 3.9rem)',
+                    fontWeight: 800,
+                    fontFamily: 'var(--font-serif)',
                     letterSpacing: '3px',
                     marginBottom: '12px',
                     lineHeight: 1.2,
@@ -190,7 +192,10 @@ export default function StoryContent({
                     color: 'var(--rose)',
                     letterSpacing: '2px',
                     marginBottom: '24px',
-                    fontWeight: 700
+                    fontWeight: 600,
+                    fontFamily: 'var(--font-garamond)',
+                    fontStyle: 'italic',
+                    textTransform: 'none'
                   }}
                 >
                   Vận dụng các cặp phạm trù cơ bản của phép biện chứng duy vật

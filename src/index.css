@@ -35,11 +35,19 @@ body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-garamond);
+  font-size: clamp(16px, 1.05vw, 18px);
   overflow-x: hidden;
   overflow-y: auto;
   min-height: 100vh;
   width: 100%;
   -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 #root {
@@ -55,8 +63,19 @@ h1, h2, h3 {
   letter-spacing: 1px;
 }
 
+h5 {
+  font-family: var(--font-garamond);
+  color: var(--rose);
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+
 .cinzel {
   font-family: var(--font-roman);
+}
+
+.cinzel-decorative {
+  font-family: var(--font-script);
 }
 
 /* Background Canvas Layer */
@@ -168,13 +187,14 @@ main.book-viewport {
 /* Widescreen Storybook Card — inside book spread */
 .narrative-card {
   width: 100%;
-  max-width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border: none;
   border-radius: 0;
-  padding: 40px 48px 50px;
+  padding: 48px 60px 58px;
   box-shadow: none;
   transition: border-color 0.6s ease, box-shadow 0.6s ease;
   position: relative;
@@ -190,8 +210,8 @@ main.book-viewport {
 
 .slide-layout {
   display: flex;
-  gap: 45px;
-  align-items: center;
+  gap: 64px;
+  align-items: stretch;
   text-align: left;
 }
 
@@ -199,6 +219,10 @@ main.book-viewport {
   flex: 1.3;
   display: flex;
   flex-direction: column;
+}
+
+.slide-text > * {
+  max-width: 640px;
 }
 
 .slide-media {
@@ -212,17 +236,54 @@ main.book-viewport {
 
 .slide-image {
   width: 100%;
-  max-height: 280px;
+  max-height: 320px;
   object-fit: contain;
   border-radius: 0px; /* Sharp classic framing */
   border: 1px solid var(--line);
   padding: 6px;
   background-color: #fff;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: floatSlow 7s ease-in-out infinite;
 }
 
 .slide-image:hover {
   transform: scale(1.03) rotate(0.5deg);
+}
+
+.character-card img {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.cover-hero-bg {
+  animation: floatAlt 10s ease-in-out infinite;
+}
+
+.cover-full-bg {
+  animation: slowZoom 14s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes floatAlt {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-10px) translateX(6px); }
+}
+
+@keyframes slowZoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-image,
+  .character-card img,
+  .cover-hero-bg,
+  .cover-full-bg {
+    animation: none;
+  }
 }
 
 /* Ornaments and Badges */
@@ -232,8 +293,8 @@ main.book-viewport {
   gap: 12px;
   font-family: var(--font-roman);
   color: var(--gold-deep);
-  font-size: 0.72rem;
-  letter-spacing: 4px;
+  font-size: 0.82rem;
+  letter-spacing: 3.2px;
   text-transform: uppercase;
   margin-bottom: 18px;
   font-weight: 500;
@@ -248,16 +309,16 @@ main.book-viewport {
 
 .narrative-card h2 {
   font-family: var(--font-serif);
-  font-size: 2.3rem;
+  font-size: 2.6rem;
   margin-bottom: 18px;
-  line-height: 1.25;
+  line-height: 1.18;
   color: var(--ink);
 }
 
 .narrative-card p {
   color: var(--ink-soft);
-  line-height: 1.75;
-  font-size: 1.05rem;
+  line-height: 1.8;
+  font-size: 1.1rem;
   margin-bottom: 20px;
 }
 
@@ -789,12 +850,12 @@ main.book-viewport {
 }
 
 .synthesis-card h5 {
-  font-family: var(--font-roman);
-  color: var(--rose);
-  font-size: 0.82rem;
+  font-family: inherit;
+  color: inherit;
+  font-size: 1rem;
   margin-bottom: 8px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-weight: inherit;
+  letter-spacing: inherit;
 }
 
 .synthesis-card p {
