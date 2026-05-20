@@ -11,7 +11,8 @@ export default function Header({ activeChapter, userChoices, scrollToChapter }) 
     if (activeChapter >= 3) score += 15;
     if (activeChapter >= 4) score += 15;
     if (userChoices.analysisChoice) score += 10;
-    if (activeChapter >= 6) score = 100;
+    if (activeChapter >= 7) score = 100;
+    else if (activeChapter >= 6) score = 95;
     else if (activeChapter >= 5) score = 90;
     return score;
   };

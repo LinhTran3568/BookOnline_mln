@@ -8,7 +8,7 @@ import AutumnLeaves from './components/AutumnLeaves';
 import './App.css';
 
 export default function App() {
-  const maxChapter = 6;
+  const maxChapter = 7;
   const minChapter = -1;
   const [activeChapter, setActiveChapter] = useState(minChapter);
   const [transitioning, setTransitioning] = useState(false);
@@ -185,7 +185,8 @@ export default function App() {
           { id: 3, label: 'Khả năng' },
           { id: 4, label: 'Ấm ức của A' },
           { id: 5, label: 'Bài học' },
-          { id: 6, label: 'Lời kết' }
+          { id: 6, label: 'Lời kết' },
+          { id: 7, label: 'Phụ lục AI' }
         ].map((item) => (
           <button
             key={item.id}

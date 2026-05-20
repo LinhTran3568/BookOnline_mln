@@ -655,7 +655,129 @@
   margin-top: 14px;
 }
 
+/* AI Usage appendix */
+.ai-pillar {
+  margin-bottom: 20px;
+}
+
+.ai-pillar h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.ai-usage-table th,
+.ai-usage-table td {
+  font-size: 0.78rem;
+}
+
+.ai-pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.ai-pillar-card {
+  padding: 14px 16px;
+  background: rgba(255, 251, 244, 0.75);
+  border: 1px solid var(--line);
+}
+
+.ai-pillar-card h4 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-roman);
+  font-size: 0.72rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin: 0 0 10px;
+}
+
+.ai-pillar-card p,
+.ai-pillar-card li {
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.ai-pillar-card ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.ai-pillar-card__note {
+  margin-top: 10px !important;
+  font-style: italic;
+  color: var(--rose) !important;
+}
+
+.ai-pillar--integrity {
+  padding: 14px 16px;
+  background: rgba(184, 148, 90, 0.08);
+  border: 1px solid rgba(184, 148, 90, 0.35);
+}
+
+.ai-integrity-signs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-integrity-sign {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.ai-integrity-sign__num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-roman);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  border: 1px solid var(--gold-deep);
+  background: rgba(255, 251, 244, 0.9);
+}
+
+.ai-integrity-sign strong {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.ai-integrity-sign p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.ai-commitment-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  margin-top: 8px;
+  background: rgba(184, 148, 90, 0.12);
+  border: 2px solid var(--gold-deep);
+}
+
 @media (max-width: 900px) {
+  .ai-pillars-grid { grid-template-columns: 1fr; }
+  .ai-usage-table { font-size: 0.7rem; }
   .conclusion-table { font-size: 0.75rem; }
   .conclusion-table th, .conclusion-table td { padding: 8px; }
   .top-bar { padding: 0 16px; }

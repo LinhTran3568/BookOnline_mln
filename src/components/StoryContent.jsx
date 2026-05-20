@@ -9,6 +9,10 @@ import {
   Search,
   Sparkles,
   Target,
+  Bot,
+  ShieldCheck,
+  Scale,
+  PenLine,
 } from 'lucide-react';
 import CVPreview from './CVPreview';
 
@@ -22,7 +26,7 @@ import lenin from '../assets/lenin.png';
 import heroImg from '../assets/hero.png';
 import interviewVideo from '../assets/1805.mp4';
 
-const PAGE_NUMBERS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
+const PAGE_NUMBERS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
 function BookSpread({ pageIndex, children }) {
   const showPageNumbers =
@@ -643,6 +647,146 @@ export default function StoryContent({
                 <div className="slide-media">
                   <img src={trio} alt="Mác, Ăng-ghen, Lê-nin" className="slide-image" />
                   
+                </div>
+              </div>
+            </BookSpread>
+          </motion.section>
+        )}
+
+        {activeChapter === 7 && (
+          <motion.section
+            key="chapter-7-ai"
+            className="story-section"
+            variants={slideVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <BookSpread pageIndex={7}>
+              <span className="chapter-badge" style={{ color: 'var(--gold-deep)' }}>
+                <Bot size={14} /> PHỤ LỤC • AI USAGE & LIÊM CHÍNH HỌC THUẬT
+              </span>
+              <h2>Minh bạch, trách nhiệm và sáng tạo trong sử dụng AI</h2>
+
+              <p style={{ fontSize: '0.92rem', marginBottom: '18px', color: 'var(--ink-soft)' }}>
+                Nhóm cam kết tuân thủ yêu cầu 4.1–4.4 về ứng dụng AI trong học tập: AI chỉ hỗ trợ quá trình biên soạn;
+                sinh viên chịu trách nhiệm về nội dung cuối cùng sau khi đối chiếu nguồn chính thống.
+              </p>
+
+              <section className="ai-pillar">
+                <h3><Sparkles size={16} /> 4.1. Minh bạch — Bảng AI Usage</h3>
+                <table className="conclusion-table ai-usage-table">
+                  <thead>
+                    <tr>
+                      <th>Công cụ AI</th>
+                      <th>Mục đích</th>
+                      <th>Prompt / tác vụ chính</th>
+                      <th>Kết quả AI</th>
+                      <th>Phần nhóm chỉnh sửa</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Cursor Agent (Claude)</td>
+                      <td>Bố cục trang web thuyết trình, CSS, hiệu ứng lật trang</td>
+                      <td>Gợi ý cấu trúc React, Framer Motion, bảng kết luận</td>
+                      <td>Khung component, class giao diện sách cổ</td>
+                      <td>Chỉnh luận điểm, case A/B, số trang, ảnh nhóm, video phỏng vấn</td>
+                    </tr>
+                    <tr>
+                      <td>ChatGPT / tương đương</td>
+                      <td>Soạn thảo nháp nội dung slide, quiz lý thuyết</td>
+                      <td>&quot;Viết tóm tắt cặp phạm trù Nội dung—Hình thức theo giáo trình LLCT&quot;</td>
+                      <td>Đoạn văn khái quát, gợi ý câu hỏi trắc nghiệm</td>
+                      <td>Rút gọn, đối chiếu tr. 108–125 GT TH Mác-Lênin; thay ví dụ CV thực tế</td>
+                    </tr>
+                    <tr>
+                      <td>AI hình ảnh (nếu có)</td>
+                      <td>Minh họa phụ (sơ đồ, icon)</td>
+                      <td>Mô tả sơ đồ quy trình Khả năng → Điều kiện → Hiện thực</td>
+                      <td>Ảnh minh họa tham khảo</td>
+                      <td>Ưu tiên ảnh/tài liệu chính thống (MIA, giáo trình); không dùng làm bằng chứng luận điểm</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <div className="ai-pillars-grid">
+                <article className="ai-pillar-card">
+                  <h4><ShieldCheck size={15} /> 4.2. Có trách nhiệm</h4>
+                  <p>
+                    Mọi khái niệm do AI gợi ý đều được nhóm <strong>kiểm chứng</strong> qua:
+                  </p>
+                  <ul>
+                    <li>Giáo trình Triết học Mác — Lênin (2019, 2021), Chương 2 — tr. 108–125, 203–234</li>
+                    <li>Nghị quyết, văn bản chính thống của Đảng về giáo dục — đại cương LLCT</li>
+                    <li>Tác phẩm gốc (Mác, Ăng-ghen, Lê-nin) — tham chiếu Marxists Internet Archive</li>
+                  </ul>
+                  <p className="ai-pillar-card__note">
+                    Nhóm chịu trách nhiệm hoàn toàn về luận điểm, ví dụ và kết luận trong bài thuyết trình.
+                  </p>
+                </article>
+
+                <article className="ai-pillar-card">
+                  <h4><PenLine size={15} /> 4.3. Sáng tạo</h4>
+                  <p>
+                    AI đóng vai trò <strong>hỗ trợ</strong>, không thay thế toàn bộ quá trình học tập và thuyết trình:
+                  </p>
+                  <ul>
+                    <li>Hỗ trợ: layout web, gợi ý quiz/modal lý thuyết, nháp câu chữ</li>
+                    <li>Sinh viên tự làm: phân tích case A & B, lập luận biện chứng, thuyết trình, Q&amp;A</li>
+                    <li>Sản phẩm đặc thù nhóm: video phỏng vấn, CV mẫu, lựa chọn tương tác trên trang</li>
+                  </ul>
+                </article>
+              </div>
+
+              <section className="ai-pillar ai-pillar--integrity">
+                <h3><Scale size={16} /> 4.4. Liêm chính học thuật — Ba dấu hiệu</h3>
+                <div className="ai-integrity-signs">
+                  <div className="ai-integrity-sign">
+                    <span className="ai-integrity-sign__num">1</span>
+                    <div>
+                      <strong>Cam kết bằng văn bản</strong>
+                      <p>
+                        Nhóm khẳng định trên phụ lục này: <em>không để AI làm thay hoàn toàn</em> bài thuyết trình,
+                        luận giải hay đánh giá kết quả học tập.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="ai-integrity-sign">
+                    <span className="ai-integrity-sign__num">2</span>
+                    <div>
+                      <strong>Phân định rõ AI output và phần sinh viên</strong>
+                      <p>
+                        Cột &quot;Kết quả AI&quot; và &quot;Phần nhóm chỉnh sửa&quot; trong bảng 4.1 thể hiện ranh giới;
+                        nội dung in đậm, ví dụ thực tế và kết luận là do nhóm biên soạn sau kiểm chứng.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="ai-integrity-sign">
+                    <span className="ai-integrity-sign__num">3</span>
+                    <div>
+                      <strong>Đối chiếu nguồn chính thống</strong>
+                      <p>
+                        Luận điểm về Nội dung—Hình thức, Bản chất—Hiện tượng, Khả năng—Hiện thực, Tất nhiên—Ngẫu nhiên
+                        được neo vào giáo trình và tư liệu Mác-Lênin, không chỉ dựa vào phản hồi AI.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <div className="ai-commitment-box">
+                <ShieldCheck size={20} style={{ color: 'var(--gold-deep)', flexShrink: 0 }} />
+                <div>
+                  <p style={{ margin: '0 0 6px', fontWeight: 600, fontSize: '0.9rem' }}>
+                    Cam kết của nhóm sinh viên
+                  </p>
+                  <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: 1.7 }}>
+                    Chúng em xác nhận đã sử dụng AI một cách có trách nhiệm: minh bạch công cụ và mục đích,
+                    tự biên soạn và bảo vệ nội dung trình bày, đồng thời chịu trách nhiệm về mọi luận điểm
+                    triết học trong bài thuyết trình Triết học Mác — Lênin.
+                  </p>
                 </div>
               </div>
             </BookSpread>

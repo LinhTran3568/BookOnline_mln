@@ -18,6 +18,7 @@ function CameraController({ activeChapter, mousePos }) {
       [0.6, 0.15, 7.8],
       [0, 0.05, 6.5],
       [0, 0.15, 6.2],
+      [0, 0.1, 6.4],
     ];
     const looks = [
       [0, 0, 0],
@@ -27,6 +28,7 @@ function CameraController({ activeChapter, mousePos }) {
       [0.25, -0.05, 0],
       [0, 0, 0],
       [0, 0.05, 0],
+      [0, 0.03, 0],
     ];
     const p = positions[activeChapter] || positions[0];
     const l = looks[activeChapter] || looks[0];
