@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ThreeCanvas from './components/ThreeCanvas';
-import Header from './components/Header';
 import StoryContent from './components/StoryContent';
 import InteractiveLore from './components/InteractiveLore';
 import CustomCursor from './components/CustomCursor';
@@ -165,41 +164,6 @@ export default function App() {
       {/* Custom High-Performance Cursor Tracker */}
       <CustomCursor />
 
-      {/* Glowing Global Header Navigation */}
-      <Header 
-        activeChapter={activeChapter} 
-        userChoices={userChoices} 
-        scrollToChapter={scrollToChapter} 
-      />
-
-      <footer className="bottom-hud">
-        <div className="sound-indicator">
-          <span className="pulse-dot" />
-          <span className="cinzel">Triết học Mác-Lênin</span>
-        </div>
-        <nav className="story-progress-indicator" aria-label="Story chapters timeline">
-        {[
-          { id: 0, label: 'Khởi đầu' },
-          { id: 1, label: 'So sánh CV' },
-          { id: 2, label: 'Bản chất' },
-          { id: 3, label: 'Khả năng' },
-          { id: 4, label: 'Ấm ức của A' },
-          { id: 5, label: 'Bài học' },
-          { id: 6, label: 'Lời kết' },
-          { id: 7, label: 'Phụ lục AI' }
-        ].map((item) => (
-          <button
-            key={item.id}
-            className={`progress-dot ui-interactive ${activeChapter === item.id ? 'active' : ''}`}
-            onClick={() => scrollToChapter(item.id)}
-            title={item.label}
-            aria-label={`Go to chapter ${item.id}`}
-          >
-            <span className="progress-dot-label cinzel">{item.label}</span>
-          </button>
-        ))}
-        </nav>
-      </footer>
 
       <main className="book-viewport" ref={bookViewportRef}>
         <div className={`book-stage ${bookTurning ? 'book-turning' : ''}`}>

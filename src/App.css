@@ -1,6 +1,6 @@
 :root {
-  --header-h: 68px;
-  --footer-h: 56px;
+  --header-h: 0px;
+  --footer-h: 0px;
 }
 
 /* Book shell & layout */
@@ -783,17 +783,6 @@
   .top-bar { padding: 0 16px; }
   .hud-pill--gold { display: none; }
   .book-stage { padding-left: 3%; padding-right: 3%; }
-}
-
-.cover-hero-bg {
-  position: absolute;
-  top: 0;
-  right: -5%;
-  width: 45%;
-  max-width: 420px;
-  opacity: 0.12;
-  pointer-events: none;
-  filter: sepia(0.3);
 }
 
 /* Full-bleed cover background (used on the new book cover page) */

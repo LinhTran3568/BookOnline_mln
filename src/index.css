@@ -254,10 +254,6 @@ main.book-viewport {
   animation: floatSlow 8s ease-in-out infinite;
 }
 
-.cover-hero-bg {
-  animation: floatAlt 10s ease-in-out infinite;
-}
-
 .cover-full-bg {
   animation: slowZoom 14s ease-in-out infinite;
 }
@@ -265,11 +261,6 @@ main.book-viewport {
 @keyframes floatSlow {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
-}
-
-@keyframes floatAlt {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-10px) translateX(6px); }
 }
 
 @keyframes slowZoom {
@@ -280,7 +271,6 @@ main.book-viewport {
 @media (prefers-reduced-motion: reduce) {
   .slide-image,
   .character-card img,
-  .cover-hero-bg,
   .cover-full-bg {
     animation: none;
   }

@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   BookMarked,
@@ -23,8 +22,6 @@ import dialectics from '../assets/dialectics.png';
 import trio from '../assets/trio.png';
 import marxEngels from '../assets/marx_engels.png';
 import lenin from '../assets/lenin.png';
-import heroImg from '../assets/hero.png';
-import interviewVideo from '../assets/1805.mp4';
 
 const PAGE_NUMBERS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
@@ -50,8 +47,6 @@ export default function StoryContent({
   onOpenLore,
   scrollToChapter
 }) {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const videoRef = useRef(null);
 
   const slideVariants = {
     hidden: { opacity: 0, y: 24 },
@@ -66,18 +61,6 @@ export default function StoryContent({
       transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
     }
   };
-
-  useEffect(() => {
-    if (!isVideoOpen) return;
-    const videoEl = videoRef.current;
-    if (!videoEl) return;
-    const playPromise = videoEl.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {
-        // Autoplay can be blocked; user can press play.
-      });
-    }
-  }, [isVideoOpen]);
 
   return (
     <div className="ui-layer" style={{ width: '100%', position: 'relative' }}>
@@ -159,7 +142,6 @@ export default function StoryContent({
             exit="exit"
           >
             <BookSpread pageIndex={0}>
-              <img src={heroImg} alt="" className="cover-hero-bg" aria-hidden="true" />
               <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center', position: 'relative' }}>
                 <img
                   src={trio}
@@ -594,33 +576,6 @@ export default function StoryContent({
 
               <div className="slide-layout" style={{ marginTop: '24px' }}>
                 <div className="slide-text">
-                  <button
-                    className="btn-cosmic ui-interactive"
-                    style={{ padding: '10px 16px', fontSize: '0.8rem', marginBottom: '14px' }}
-                    onClick={() => setIsVideoOpen((v) => !v)}
-                  >
-                    {isVideoOpen ? 'Ẩn video' : 'Phát video'}
-                  </button>
-
-                  {isVideoOpen && (
-                    <div
-                      style={{
-                        border: '1px solid var(--line)',
-                        background: 'rgba(255,251,244,0.7)',
-                        padding: '12px',
-                        marginBottom: '18px'
-                      }}
-                    >
-                      <video
-                        ref={videoRef}
-                        src={interviewVideo}
-                        controls
-                        playsInline
-                        style={{ width: '100%', borderRadius: '10px' }}
-                      />
-                    </div>
-                  )}
-
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', marginBottom: '8px' }}>
                     <BookOpen size={14} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} />
                     Tài liệu tham khảo
